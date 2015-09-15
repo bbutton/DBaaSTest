@@ -1,0 +1,8 @@
+---
+applications:
+- name: bab-dbaas-test
+  memory: 128M
+  instances: 1
+  services:
+    - bab-mysql
+
