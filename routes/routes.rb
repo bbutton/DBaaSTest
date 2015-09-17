@@ -1,16 +1,17 @@
 require 'mysql2'
-
+require_relative '../models/database_connection_model'
 get '/' do
-  connection_string_hash = settings.connection_string.to_hash
+  connection_string_model = settings.connection_info
 
   connection = Mysql2::Client.new(
-      host: connection_string_hash[:host],
-      port: connection_string_hash[:port],
-      username: connection_string_hash[:username],
-      password: connection_string_hash[:password],
-      database: connection_string_hash[:database],
-      sslca: "./client_cert.pem")
+      host: connection_string_model.host_name,
+      port: connection_string_model.port,
+      username: connection_string_model.user_id,
+      password: connection_string_model.password,
+      database: connection_string_model.database,
+      sslca: connection_string_model.cert_file)
 
-  results = connection.query("show status")
+  results = connection.query("show status like 'Ssl_cipher'")
+  results.count.to_s
 
 end

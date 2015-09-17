@@ -1,6 +1,8 @@
 require 'json'
 
 class DatabaseConnectionModel
+  attr_reader :host_name, :port, :user_id, :password, :database, :cert_data, :cert_file
+
   def self.FromCloudFoundryJson(vcap_services_json_string, cert_file_name)
     vcap_service_json = JSON.parse(vcap_services_json_string)
     host_name = vcap_service_json["ctl_mysql"][0]["credentials"]["host"]
