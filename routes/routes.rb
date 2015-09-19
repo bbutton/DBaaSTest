@@ -1,5 +1,6 @@
 require 'mysql2'
 require_relative '../models/database_connection_model'
+
 get '/' do
   connection_string_model = settings.connection_info
 
@@ -13,5 +14,4 @@ get '/' do
 
   results = connection.query("show status like 'Ssl_cipher'")
   results.count.to_s
-
 end
